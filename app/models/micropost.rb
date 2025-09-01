@@ -4,6 +4,8 @@ class Micropost < ApplicationRecord
     attachable.variant :display, resize_to_limit: [500, 500]
   end
   default_scope -> { order(created_at: :desc) }
+  scope :following, -> (user){ where(user: user.following) }
+  scope :latest, -> (user){ following(user).order(created_at: :desc).limit(10) }
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
   validates :image,   content_type: { in: %w[image/jpeg image/gif image/png],

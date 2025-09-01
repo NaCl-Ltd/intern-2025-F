@@ -14,6 +14,10 @@ class MicropostsController < ApplicationController
     end
   end
 
+  def latest
+    @microposts = Micropost.latest(current_user)
+  end
+  
   def destroy
     @micropost.destroy
     flash[:success] = "Micropost deleted"
