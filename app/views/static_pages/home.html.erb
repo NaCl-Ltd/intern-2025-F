@@ -12,6 +12,10 @@
       </section>
     </aside>
     <div class="col-md-8">
+      <% if @sticked_micropost%>
+        <h3>Sticked Microposts</h3>
+        <%= render 'users/sticked_micropost' %>
+      <% end %>
       <h3>Micropost Feed</h3>
       <%= render 'shared/feed' %>
     </div>
