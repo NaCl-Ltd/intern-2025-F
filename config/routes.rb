@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :microposts do
     member do
       post :stick_on
+      post :unpin_post
     end
   end
 end
