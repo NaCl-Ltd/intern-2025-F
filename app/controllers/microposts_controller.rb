@@ -24,6 +24,10 @@ class MicropostsController < ApplicationController
     end
   end
 
+  def latest
+    @microposts = Micropost.latest(current_user)
+  end
+
   private
 
     def micropost_params
