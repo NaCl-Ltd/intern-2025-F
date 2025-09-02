@@ -39,7 +39,7 @@ class MicropostsController < ApplicationController
     current_user.update(sticked_post_id: nil)
     Rails.logger.info "sticked_post_id has unpinned."
     flash[:info] = "Unpinned the micropost!"
-    redirect_to request.referrer, status: :see_other
+    redirect_to user_path(current_user), status: :see_other
   end
 
   private
