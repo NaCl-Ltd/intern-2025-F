@@ -28,6 +28,13 @@ class MicropostsController < ApplicationController
     @microposts = Micropost.latest(current_user)
   end
 
+  def stick_on
+    current_user.update(sticked_post_id: params[:id])
+    Rails.logger.info "sticked_post_id has set: #{current_user.sticked_post_id}"
+    flash[:info] = "Sticked on the micropost!"
+    redirect_to request.referrer, status: :see_other
+  end
+
   private
 
     def micropost_params

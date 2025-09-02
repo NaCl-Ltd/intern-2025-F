@@ -23,4 +23,10 @@ Rails.application.routes.draw do
       get :latest
     end
   end
+
+  resources :microposts do
+    member do
+      post :stick_on
+    end
+  end
 end

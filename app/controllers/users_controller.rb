@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
+    @sticked_micropost = Micropost.find_by(id: @user.sticked_post_id) if @user.sticked_post_id?
   end
 
   def new
