@@ -7,8 +7,9 @@
   <% end %>
   <p><%= user.introduction %></p>
   <div class="follow-stats">
-    following: <%= user.following.count %> /
-    followers: <%= user.followers.count %>
+    <%= user.class.human_attribute_name(:following) %> : <%= user.following.count %> /
+    <%= user.class.human_attribute_name(:followers) %> : <%= user.followers.count %>
   </div>
+
 
 </li>
