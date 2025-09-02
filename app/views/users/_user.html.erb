@@ -6,4 +6,9 @@
                                           turbo_confirm: "You sure?" } %>
   <% end %>
   <p><%= user.introduction %></p>
+  <div class="follow-stats">
+    following: <%= user.following.count %> /
+    followers: <%= user.followers.count %>
+  </div>
+
 </li>
