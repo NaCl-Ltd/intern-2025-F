@@ -1,0 +1,16 @@
+<%= link_to gravatar_for(@sticked_micropost.user, size: 50), @sticked_micropost.user %>
+<span class="user"><%= link_to @sticked_micropost.user.name, @sticked_micropost.user %></span>
+
+<div class="content">
+  <%= @sticked_micropost.content %>
+  <% if @sticked_micropost.image.attached? %>
+    <%= image_tag @sticked_micropost.image.variant(:display) %>
+  <% end %>
+</div>
+<div class="timestamp" style="color: #777777; display: block; margin-left: 60px;">
+  Posted <%= time_ago_in_words(@sticked_micropost.created_at) %> ago.
+  <% if current_user?(@sticked_micropost.user) %>
+    <%= link_to "delete", @sticked_micropost, data: { "turbo-method": :delete,
+                                              turbo_confirm: "You sure?" } %>
+  <% end %>
+</div>
