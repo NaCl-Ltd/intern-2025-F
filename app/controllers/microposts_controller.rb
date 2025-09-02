@@ -14,10 +14,6 @@ class MicropostsController < ApplicationController
     end
   end
 
-  def latest
-    @microposts = Micropost.latest(current_user)
-  end
-  
   def destroy
     @micropost.destroy
     flash[:success] = "Micropost deleted"
@@ -26,6 +22,10 @@ class MicropostsController < ApplicationController
     else
       redirect_to request.referrer, status: :see_other
     end
+  end
+
+  def latest
+    @microposts = Micropost.latest(current_user)
   end
 
   private
