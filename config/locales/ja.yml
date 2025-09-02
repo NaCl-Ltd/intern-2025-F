@@ -1,3 +1,8 @@
 ja:
   links:
     latest: "最新"
+  activerecord:
+    attributes:
+      user:
+        following: "フォロー中"
+        followers: "フォロワー"
