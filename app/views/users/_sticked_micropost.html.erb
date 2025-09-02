@@ -10,6 +10,7 @@
 <div class="timestamp" style="color: #777777; display: block; margin-left: 60px;">
   Posted <%= time_ago_in_words(@sticked_micropost.created_at) %> ago.
   <% if current_user?(@sticked_micropost.user) %>
+    <%= link_to "Unpin post", unpin_post_micropost_path(@sticked_micropost), data: { "turbo-method": :post } %>
     <%= link_to "delete", @sticked_micropost, data: { "turbo-method": :delete,
                                               turbo_confirm: "You sure?" } %>
   <% end %>
