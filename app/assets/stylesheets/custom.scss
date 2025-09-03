@@ -296,7 +296,7 @@ input {
   .timestamp {
     color: $gray-light;
     display: block;
-    margin-left: 60px;
+    margin-right: 60px;
   }
   .gravatar {
     float: left;
@@ -309,6 +309,7 @@ input {
     gap: 12px;
   }
 }
+
 .micropost-actions {
   display: flex;
   align-items: center;

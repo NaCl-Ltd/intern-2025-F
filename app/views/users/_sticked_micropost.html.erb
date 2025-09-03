@@ -15,6 +15,7 @@
     <%= render partial: "likes/like", locals: { micropost: @sticked_micropost, num_of_likes: @num_of_likes } %>
   </div>
   <div id="comment-btn<%= @sticked_micropost.id %>">
+    <% @micropost = @sticked_micropost %>
     <%= render partial: "comments/comment", locals: { micropost: @sticked_micropost} %>
   </div>
   </div>
