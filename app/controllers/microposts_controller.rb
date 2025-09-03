@@ -26,6 +26,7 @@ class MicropostsController < ApplicationController
 
   def latest
     @microposts = Micropost.latest(current_user)
+    @likes = Like.all
   end
 
   def stick_on
