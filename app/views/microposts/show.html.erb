@@ -1,0 +1,39 @@
+<% provide(:title, "Micropost詳細") %>
+<div class="row">
+  <!-- 左側：コメント投稿欄 -->
+  <aside class="col-md-4">
+    <section>
+      <h3>コメントする</h3>
+      <%= render 'shared/comment_form', micropost: @micropost, comment: @comment %>
+    </section>
+  </aside>
+  <!-- 中央：ポスト内容とコメント一覧 -->
+  <div class="col-md-8">
+    <section class="micropost-detail">
+      <h3>ポスト内容</h3>
+      <div class="micropost-content">
+        <%= gravatar_for @micropost.user, size: 50 %>
+        <strong><%= @micropost.user.name %></strong>
+        <p><%= @micropost.content %></p>
+        <% if @micropost.image.attached? %>
+          <%= image_tag @micropost.image.variant(:display) %>
+        <% end %>
+        <span class="timestamp">
+          Posted <%= time_ago_in_words(@micropost.created_at) %> ago.
+        </span>
+      </div>
+    </section>
+    <section class="comments-list">
+      <h4>コメント一覧</h4>
+      <ol class="comments">
+        <% @micropost.comments.each do |comment| %>
+        <strong><%= comment.user.name %>:</strong>
+        <span style = "float:right" class="timestamp">
+            <%= time_ago_in_words(comment.created_at) %> ago
+        </span>
+        <p><%= comment.content %></p>
+        <% end %>
+      </ol>
+    </section>
+  </div>
+</div>

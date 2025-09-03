@@ -7,11 +7,17 @@
     <%= image_tag @sticked_micropost.image.variant(:display) %>
   <% end %>
 </div>
-<div class="timestamp" style="color: #777777; display: block; margin-left: 60px;">
+<div class="timestamp" style="color: #777777; margin-left: 60px;">
   Posted <%= time_ago_in_words(@sticked_micropost.created_at) %> ago.
   <% @num_of_likes = @likes.where(micropost_id: @sticked_micropost.id).count %>
+  <div class="micropost-actions">
   <div id="like-btn<%= @sticked_micropost.id %>">
     <%= render partial: "likes/like", locals: { micropost: @sticked_micropost, num_of_likes: @num_of_likes } %>
+  </div>
+  <div id="comment-btn<%= @sticked_micropost.id %>">
+    <% @micropost = @sticked_micropost %>
+    <%= render partial: "comments/comment", locals: { micropost: @sticked_micropost} %>
+  </div>
   </div>
   <% if current_user?(@sticked_micropost.user) %>
     <%= link_to "Unpin post", unpin_post_micropost_path(@sticked_micropost), data: { "turbo-method": :post } %>
