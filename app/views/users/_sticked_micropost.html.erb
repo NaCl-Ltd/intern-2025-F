@@ -9,7 +9,7 @@
 </div>
 <div class="timestamp" style="color: #777777; display: block; margin-left: 60px;">
   Posted <%= time_ago_in_words(@sticked_micropost.created_at) %> ago.
-  <% @num_of_likes = @likes.where(micropost_id: micropost.id).count %>
+  <% @num_of_likes = @likes.where(micropost_id: @sticked_micropost.id).count %>
   <div id="like-btn<%= @sticked_micropost.id %>">
     <%= render partial: "likes/like", locals: { micropost: @sticked_micropost, num_of_likes: @num_of_likes } %>
   </div>
