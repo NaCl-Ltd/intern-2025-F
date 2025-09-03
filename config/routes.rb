@@ -24,6 +24,10 @@ Rails.application.routes.draw do
       get :latest
     end
   end
+  resources :users, only: [:index, :show]
+  resources :microposts,  only: [:index, :show, :create] do
+    resources :comments, only: [:create]
+  end
 
   resources :microposts do
     member do
