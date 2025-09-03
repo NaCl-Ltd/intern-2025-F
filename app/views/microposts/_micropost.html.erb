@@ -13,6 +13,9 @@
     <div id="like-btn<%= micropost.id %>">
       <%= render partial: "likes/like", locals: { micropost: micropost, num_of_likes: @num_of_likes} %>
     </div>
+    <div id="comment-btn<%= micropost.id %>">
+      <%= render partial: "comments/comment", locals: { micropost: micropost} %>
+    </div>
     <% if current_user?(micropost.user) %>
       <%= link_to "stick on", stick_on_micropost_path(micropost.id), data: { "turbo-method": :post } %>
       <%= link_to "delete", micropost, data: { "turbo-method": :delete,
