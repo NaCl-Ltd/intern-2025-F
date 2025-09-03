@@ -303,6 +303,16 @@ input {
     margin-right: 10px;
     margin-top: 5px;
   }
+  .micropost-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+.micropost-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 aside {
