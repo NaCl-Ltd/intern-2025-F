@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   resources :microposts,          only: [:create, :destroy] do
+    resource :likes, only: [:create, :destroy]
     collection do
       get :latest
     end
