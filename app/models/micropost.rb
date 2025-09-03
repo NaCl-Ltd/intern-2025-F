@@ -1,10 +1,10 @@
 class Micropost < ApplicationRecord
   belongs_to :user
+  belongs_to :forum_thread, counter_cache: false
   has_one_attached :image do |attachable|
     attachable.variant :display, resize_to_limit: [500, 500]
   end
-  has_many :likes
-  belongs_to :user
+  has_many :likes, dependent: :destroy
   has_many :comments
   default_scope -> { order(created_at: :desc) }
   scope :following, -> (user){ where(user: user.following) }
