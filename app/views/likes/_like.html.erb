@@ -1,5 +1,5 @@
 <% if current_user && micropost.liked_by?(current_user)%>
-    <%=link_to "❤️", micropost_likes_path(micropost.id),  data: { turbo_method: :delete }, class: "micropost_likes" %>
+    <%=link_to "❤️#{@num_of_likes}", micropost_likes_path(micropost.id),  data: { turbo_method: :delete }, class: "micropost_likes" %>
 <% else %>
-    <%=link_to "♡", micropost_likes_path(micropost.id), data: { turbo_method: :post }, class: "micropost_likes" %>
+    <%=link_to "♡#{@num_of_likes}", micropost_likes_path(micropost.id), data: { turbo_method: :post }, class: "micropost_likes" %>
 <% end %>
