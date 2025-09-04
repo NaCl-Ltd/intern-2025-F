@@ -5,7 +5,7 @@ class Micropost < ApplicationRecord
     attachable.variant :display, resize_to_limit: [500, 500]
   end
   has_many :likes, dependent: :destroy
-  has_many :comments
+  has_many :comments, -> { order(created_at: :desc) }, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
   scope :following, -> (user){ where(user: user.following) }
   scope :latest, -> (user){ following(user).where(created_at:(Time.zone.now-3600*48)..).order(created_at: :desc).limit(10) }
