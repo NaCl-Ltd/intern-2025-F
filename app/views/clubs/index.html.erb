@@ -11,7 +11,7 @@
               <% if club.crest_url.present? %>
                 <%= image_tag club.crest_url, alt: club.name, class: "club-crest mb-2" %>
               <% else %>
-                <%= image_tag "no_image.png", alt: "No Image", class: "club-crest mb-2" %>
+                <%# <%= image_tag "no_image.png", alt: "No Image", class: "club-crest mb-2" %>
               <% end %>
               <h5 class="card-title"><%= club.name %></h5>
             <% end %>
