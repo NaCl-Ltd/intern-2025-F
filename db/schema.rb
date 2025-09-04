@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_09_03_041918) do
+ActiveRecord::Schema[7.0].define(version: 2025_09_04_023106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -138,6 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_09_03_041918) do
     t.datetime "reset_sent_at"
     t.text "introduction"
     t.integer "sticked_post_id"
+    t.string "favorite_team"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
