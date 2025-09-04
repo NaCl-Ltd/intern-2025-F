@@ -38,14 +38,17 @@ Rails.application.routes.draw do
       post :unpin_post
     end
   end
-  
+
   resources :clubs, only: %i[index show]
   resources :matches, only: %i[index show] do
+    resources :comments, only: [:create] do
+      post :create
+    end
     member do
       get :mom_results      # 集計表示
       post :close_votes     # 管理/ジョブ用
     end
-    resources :votes, only: %i[create update], module: :matches   # /matches/:match_id/votes
+    resources :votes, only: %i[new create update], module: :matches   # /matches/:match_id/votes
     resources :threads, only: %i[create], module: :matches        # matchスレ自動生成の手動補助
   end
 

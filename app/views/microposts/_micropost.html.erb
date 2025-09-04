@@ -1,6 +1,13 @@
 <li id="micropost-<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
-  <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+  <span class="user">
+    <%= link_to micropost.user.name, micropost.user %>
+    <% if micropost.user.favorite_team.present? %>
+      <span class="badge-team <%= micropost.user.favorite_team.parameterize %>">
+        <%= micropost.user.favorite_team %>
+      </span>
+    <% end %>
+  </span>
   <span class="content">
     <%= micropost.content %>
     <% if micropost.image.attached? %>
@@ -8,13 +15,14 @@
     <% end %>
   </span>
   <span class="timestamp">
-    Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+    Posted <%= time_ago_in_words(micropost.created_at) %>
     <% @num_of_likes = @likes.where(micropost_id: micropost.id).count %>
     <div class="microposts micropost-actions">
     <div id="like-btn<%= micropost.id %>">
       <%= render partial: "likes/like", locals: { micropost: micropost, num_of_likes: @num_of_likes} %>
     </div>
     <div id="comment-btn<%= micropost.id %>">
+      <% @micropost = micropost %>
       <%= render partial: "comments/comment", locals: { micropost: micropost} %>
     </div>
     </div>

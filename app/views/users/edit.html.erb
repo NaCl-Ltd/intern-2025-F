@@ -21,6 +21,9 @@
       <%= f.label :introduction, "introduction" %>
       <%= f.text_field :introduction, class: 'form-control' %>
 
+      <%= f.label :favorite_team, "favorite team" %>
+      <%= f.select :favorite_team, ['Arsenal', 'Aston Villa', 'Bournemouth', 'Brentford', 'Brighton and Hove Albion', 'Burnley', 'Chelsea', 'Crystal Palace', 'Everton', 'Fulham', 'Leeds United', 'Liverpool', 'Manchester City', 'Manchester United', 'Newcastle United', 'Nottingham Forest', 'Sunderland', 'Tottenham Hotspur', 'West Ham United', 'Wolverhampton Wanderers'], {}, class: 'form-control' %>
+
       <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
 

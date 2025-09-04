@@ -1,5 +1,12 @@
 <%= link_to gravatar_for(@sticked_micropost.user, size: 50), @sticked_micropost.user %>
-<span class="user"><%= link_to @sticked_micropost.user.name, @sticked_micropost.user %></span>
+<span class="user">
+  <%= link_to @sticked_micropost.user.name, @sticked_micropost.user %>
+  <% if @sticked_micropost.user.favorite_team.present? %>
+    <span class="badge-team <%= @sticked_micropost.user.favorite_team.parameterize %>">
+      <%= @sticked_micropost.user.favorite_team %>
+    </span>
+  <% end %>
+</span>
 
 <div class="content">
   <%= @sticked_micropost.content %>
@@ -8,7 +15,7 @@
   <% end %>
 </div>
 <div class="timestamp" style="color: #777777; margin-left: 60px;">
-  Posted <%= time_ago_in_words(@sticked_micropost.created_at) %> ago.
+  Posted <%= time_ago_in_words(@sticked_micropost.created_at) %>
   <% @num_of_likes = @likes.where(micropost_id: @sticked_micropost.id).count %>
   <div class="micropost-actions">
   <div id="like-btn<%= @sticked_micropost.id %>">

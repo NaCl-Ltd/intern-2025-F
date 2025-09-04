@@ -11,7 +11,6 @@ class MicropostsController < ApplicationController
     @micropost = Micropost.find(params[:id])
     @comments = @micropost.comments
     @comment  = current_user.comments.build(micropost_id: @micropost.id)
-    # @comment = Comment.new
   end
 
   def create
@@ -57,12 +56,12 @@ class MicropostsController < ApplicationController
 
   private
 
-    def micropost_params
-      params.require(:micropost).permit(:content, :image)
-    end
+  def micropost_params
+    params.require(:micropost).permit(:content, :image)
+  end
 
-    def correct_user
-      @micropost = current_user.microposts.find_by(id: params[:id])
-      redirect_to root_url, status: :see_other if @micropost.nil?
-    end
+  def correct_user
+    @micropost = current_user.microposts.find_by(id: params[:id])
+    redirect_to root_url, status: :see_other if @micropost.nil?
+  end
 end

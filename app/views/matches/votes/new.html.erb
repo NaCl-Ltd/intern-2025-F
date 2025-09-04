@@ -1,0 +1,158 @@
+<style>
+    body {
+        font-family: 'Arial';
+        background: linear-gradient(135deg, #37003c 0%, #00ff87 100%);
+    }
+    .voting-container {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(55, 0, 60, 0.3);
+        padding: 40px;
+        max-width: 600px;
+        margin: 40px auto;
+    }
+    .header {
+        text-align: center;
+        margin-bottom: 30px;
+        margin-top: 50px;
+    }
+    .header h1 {
+        color: #37003c;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    .match-info {
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    .form-section {
+        margin-bottom: 30px;
+    }
+    .section-title {
+        color: #37003c;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #00ff87;
+    }
+    .player-list {
+        display: grid;
+        gap: 12px;
+    }
+    .player-option {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #fafafa;
+    }
+    .player-option:hover {
+        border-color: #37003c;
+        background: #f5f5f5;
+    }
+    .player-option input[type="radio"] {
+        margin-right: 12px;
+        width: 18px;
+        height: 18px;
+        accent-color: #37003c;
+    }
+    .player-option.selected {
+        border-color: #37003c;
+        background: #f0f8ff;
+    }
+    .player-name {
+        font-weight: 500;
+        color: #333;
+        flex-grow: 1;
+    }
+    .player-number {
+        color: #666;
+        font-size: 14px;
+        margin-left: 8px;
+    }
+    .submit-button {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(135deg, #37003c 0%, #00ff87 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        margin-top: 20px;
+    }
+    .submit-button:hover {
+        transform: translateY(-2px);
+    }
+    .submit-button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+    }
+</style>
+
+<div class="voting-container">
+    <div class="header">
+        <h1>Man of the Match 投票</h1>
+        <div class="match-info">
+            <%= @match.home_club.name %> vs <%= @match.away_club.name %><br>
+            <%= @match.kickoff_at.strftime("%Y年%m月%d日") %>
+        </div>
+    </div>
+
+    <%= form_with url: match_votes_path(@match), method: :post, local: true, data: { turbo_frame: "mom_votes" }, html: { id: "momVotingForm" } do |f| %>
+        <div class="form-section">
+            <h3 class="section-title"><%= @match.home_club.name %></h3>
+            <div class="player-list">
+                <% @match.home_club.players.each do |player| %>
+                    <label class="player-option">
+                        <%= radio_button_tag 'match_vote[choice]', player.id, false %>
+                        <span class="player-name"><%= player.name %></span>
+                        <span class="player-number">#<%= player.jersey_number %></span>
+                    </label>
+                <% end %>
+            </div>
+        </div>
+        <div class="form-section">
+            <h3 class="section-title"><%= @match.away_club.name %></h3>
+            <div class="player-list">
+                <% @match.away_club.players.each do |player| %>
+                    <label class="player-option">
+                        <%= radio_button_tag 'match_vote[choice]', player.id, false %>
+                        <span class="player-name"><%= player.name %></span>
+                        <span class="player-number">#<%= player.jersey_number %></span>
+                    </label>
+                <% end %>
+            </div>
+        </div>
+        <button type="submit" class="submit-button" id="submitBtn" disabled>
+            投票する
+        </button>
+    <% end %>
+</div>
+
+<script>
+    document.addEventListener('turbo:load', function() {
+        const submitBtn = document.getElementById('submitBtn');
+        const radioButtons = document.querySelectorAll('input[name="match_vote[choice]"]');
+        const playerOptions = document.querySelectorAll('.player-option');
+
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                submitBtn.disabled = false;
+                playerOptions.forEach(option => option.classList.remove('selected'));
+                if (this.checked) {
+                    this.closest('.player-option').classList.add('selected');
+                }
+            });
+        });
+    });
+</script>

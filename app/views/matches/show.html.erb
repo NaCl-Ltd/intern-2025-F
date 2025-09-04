@@ -1,27 +1,70 @@
-<h1>Match Details</h1>
+<table style="margin: 20px auto 0 auto; font-weight: bold; font-size: 5rem; letter-spacing: 0.01rem; width: auto;">
+  <tr>
+    <td style="text-align: right; padding-right: 30px;"><%= @match.home_club.name %></td>
+    <td style="text-align: center; width: 120px;">vs</td>
+    <td style="text-align: left; padding-left: 30px;"><%= @match.away_club.name %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right; padding-right: 30px;"><%= @match.home_score %></td>
+    <td style="text-align: center; width: 120px;">vs</td>
+    <td style="text-align: left; padding-left: 30px;"><%= @match.away_score %></td>
+  </tr>
+</table>
 
-<p>
-  <strong>Home Team:</strong>
-  <%= @match.home_club.name %>
-</p>
+<div class="match-info" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 5px 0; font-size: 2rem; width: 100%;">
+  <div>
+    <strong><%= @match.kickoff_at.strftime("%Y-%m-%d") %></strong>
+  </div>
+</div>
 
-<p>
-  <strong>Away Team:</strong>
-  <%= @match.away_club.name %>
-</p>
 
-<p>
-  <strong>Kickoff Time:</strong>
-  <%= @match.kickoff_at.strftime("%Y-%m-%d %H:%M") %>
-</p>
-
-<h2>Man of the Match Voting Results</h2>
-<% if @mom_summary.present? %>
-  <ul>
-    <% @mom_summary.each do |choice, count| %>
-      <li><%= choice %>: <%= count %> votes</li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No votes yet.</p>
+<h1 style="font-weight: bold; letter-spacing: 0.01rem; margin-top: 50px;">Man of the Match Voting Result</h1>
+<%= turbo_frame_tag "mom_results", style: "display: flex; flex-direction: column; align-items: center; justify-content: center;" do %>
+  <%= render partial: "mom_results", locals: { mom_summary: @mom_summary } %>
 <% end %>
+
+<div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+  <%= link_to "Vote", new_match_vote_path(@match.id), class: "modern-vote-btn" %>
+</div>
+
+<style>
+  .modern-vote-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
+    color: #fff;
+    font-weight: bold;
+    font-size: 3rem;
+    border: none;
+    border-radius: 60px;
+    box-shadow: 0 4px 16px rgba(79,140,255,0.15);
+    text-decoration: none;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .modern-vote-btn:hover {
+    background: linear-gradient(90deg, #38e8ff 0%, #4f8cff 100%);
+    box-shadow: 0 8px 24px rgba(56,232,255,0.18);
+    transform: translateY(-2px) scale(1.04);
+    color: #fff;
+    text-decoration: none;
+  }
+</style>
+
+<section>
+  <h4>コメントする</h3>
+  <%= render 'shared/comment_form', match: @match, comment: @comment %>
+</section>
+
+<section class="comments-list">
+  <h3>スレッド</h4>
+  <ol class="comments">
+    <% @match.comments.order(created_at: :desc).each do |comment| %>
+      <strong><%= comment.user.name %>:</strong>
+      <span style="float:right" class="timestamp">
+        <%= time_ago_in_words(comment.created_at) %>
+      </span>
+      <p><%= comment.content %></p>
+    <% end %>
+  </ol>
+</section>
