@@ -11,7 +11,6 @@ class MicropostsController < ApplicationController
     @micropost = Micropost.find(params[:id])
     @comments = @micropost.comments
     @comment  = current_user.comments.build(micropost_id: @micropost.id)
-    # @comment = Comment.new
   end
 
   def create
