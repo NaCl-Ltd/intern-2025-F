@@ -5,9 +5,13 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
+        <% if @user.favorite_team.present? %>
+          <span class="badge-team <%= @user.favorite_team.parameterize %>">
+            <%= @user.favorite_team %>
+          </span>
+        <% end %>
       </h1>
       <p><%= @user.introduction %></p>
-      <p><%= @user.favorite_team %></p>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
