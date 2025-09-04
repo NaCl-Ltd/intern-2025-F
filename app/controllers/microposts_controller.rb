@@ -3,66 +3,66 @@ class MicropostsController < ApplicationController
   before_action :correct_user,   only: :destroy
 
   def index
-    @microposts = Micropost.all
-    @micropost = Micropost.new
+  @microposts = Micropost.all
+  @micropost = Micropost.new
   end
 
   def show
-    @micropost = Micropost.find(params[:id])
-    @comments = @micropost.comments
-    @comment  = current_user.comments.build(micropost_id: @micropost.id)
-    # @comment = Comment.new
+  @micropost = Micropost.find(params[:id])
+  @comments = @micropost.comments
+  @comment  = current_user.comments.build(micropost_id: @micropost.id)
+  # @comment = Comment.new
   end
 
   def create
-    @micropost = current_user.microposts.build(micropost_params)
-    @micropost.image.attach(params[:micropost][:image])
-    if @micropost.save
-      flash[:success] = "Micropost created!"
-      redirect_to root_url
-    else
-      @feed_items = current_user.feed.paginate(page: params[:page])
-      render 'static_pages/home', status: :unprocessable_entity
-    end
+  @micropost = current_user.microposts.build(micropost_params)
+  @micropost.image.attach(params[:micropost][:image])
+  if @micropost.save
+    flash[:success] = "Micropost created!"
+    redirect_to root_url
+  else
+    @feed_items = current_user.feed.paginate(page: params[:page])
+    render 'static_pages/home', status: :unprocessable_entity
+  end
   end
 
   def destroy
-    @micropost.destroy
-    flash[:success] = "Micropost deleted"
-    if request.referrer.nil?
-      redirect_to root_url, status: :see_other
-    else
-      redirect_to request.referrer, status: :see_other
-    end
+  @micropost.destroy
+  flash[:success] = "Micropost deleted"
+  if request.referrer.nil?
+    redirect_to root_url, status: :see_other
+  else
+    redirect_to request.referrer, status: :see_other
+  end
   end
 
   def latest
-    @microposts = Micropost.latest(current_user)
-    @likes = Like.all
+  @microposts = Micropost.latest(current_user)
+  @likes = Like.all
   end
 
   def stick_on
-    current_user.update(sticked_post_id: params[:id])
-    Rails.logger.info "sticked_post_id has set: #{current_user.sticked_post_id}"
-    flash[:info] = "Sticked on the micropost!"
-    redirect_to request.referrer, status: :see_other
+  current_user.update(sticked_post_id: params[:id])
+  Rails.logger.info "sticked_post_id has set: #{current_user.sticked_post_id}"
+  flash[:info] = "Sticked on the micropost!"
+  redirect_to request.referrer, status: :see_other
   end
 
   def unpin_post
-    current_user.update(sticked_post_id: nil)
-    Rails.logger.info "sticked_post_id has unpinned."
-    flash[:info] = "Unpinned the micropost!"
-    redirect_to user_path(current_user), status: :see_other
+  current_user.update(sticked_post_id: nil)
+  Rails.logger.info "sticked_post_id has unpinned."
+  flash[:info] = "Unpinned the micropost!"
+  redirect_to user_path(current_user), status: :see_other
   end
 
   private
 
-    def micropost_params
-      params.require(:micropost).permit(:content, :image)
-    end
+  def micropost_params
+    params.require(:micropost).permit(:content, :image)
+  end
 
-    def correct_user
-      @micropost = current_user.microposts.find_by(id: params[:id])
-      redirect_to root_url, status: :see_other if @micropost.nil?
-    end
+  def correct_user
+    @micropost = current_user.microposts.find_by(id: params[:id])
+    redirect_to root_url, status: :see_other if @micropost.nil?
+  end
 end

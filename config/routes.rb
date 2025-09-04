@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   post   "/login",   to: "sessions#create"
   delete "/logout",  to: "sessions#destroy"
   resources :users do
-    member do
-      get :following, :followers
-    end
+  member do
+    get :following, :followers
+  end
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
@@ -20,36 +20,36 @@ Rails.application.routes.draw do
   resources :comments,            only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   resources :microposts,          only: [:create, :destroy] do
-    resource :likes, only: [:create, :destroy]
-    collection do
-      get :latest
-    end
+  resource :likes, only: [:create, :destroy]
+  collection do
+    get :latest
+  end
   end
   resources :users, only: [:index, :show]
   resources :microposts,  only: [:index, :show, :create] do
-    resources :comments, only: [:create] do
-      post :create
-    end
+  resources :comments, only: [:create] do
+    post :create
+  end
   end
 
   resources :microposts do
-    member do
-      post :stick_on
-      post :unpin_post
-    end
+  member do
+    post :stick_on
+    post :unpin_post
+  end
   end
   
   resources :clubs, only: %i[index show]
   resources :matches, only: %i[index show] do
-    member do
-      get :mom_results      # 集計表示
-      post :close_votes     # 管理/ジョブ用
-    end
-    resources :votes, only: %i[create update], module: :matches   # /matches/:match_id/votes
-    resources :threads, only: %i[create], module: :matches        # matchスレ自動生成の手動補助
+  member do
+    get :mom_results      # 集計表示
+    post :close_votes     # 管理/ジョブ用
+  end
+  resources :votes, only: %i[create update], module: :matches   # /matches/:match_id/votes
+  resources :threads, only: %i[create], module: :matches        # matchスレ自動生成の手動補助
   end
 
   resources :threads, only: %i[index show create] do
-    resources :microposts, only: %i[index create], module: :threads
+  resources :microposts, only: %i[index create], module: :threads
   end
 end
