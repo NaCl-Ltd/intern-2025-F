@@ -26,12 +26,12 @@
     <section class="comments-list">
       <h4>コメント一覧</h4>
       <ol class="comments">
-        <% @micropost.comments.order(created_at: :desc).each do |comment| %>
-          <strong><%= comment.user.name %>:</strong>
-          <span style="float:right" class="timestamp">
+        <% @micropost.comments.each do |comment| %>
+        <strong><%= comment.user.name %>:</strong>
+        <span style = "float:right" class="timestamp">
             <%= time_ago_in_words(comment.created_at) %>
-          </span>
-          <p><%= comment.content %></p>
+        </span>
+        <p><%= comment.content %></p>
         <% end %>
       </ol>
     </section>
