@@ -1,0 +1,58 @@
+<% provide(:title, @club.name) %>
+<h1><%= @club.name %></h1>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section class="club_info">
+      <% if @club.crest_url.present? %>
+        <%= image_tag @club.crest_url, alt: @club.name, class: "club-crest-large" %>
+      <% end %>
+      <h1><%= @club.name %></h1>
+      <p><strong>略称:</strong> <%= @club.short_name %><br>
+      <strong>スタジアム:</strong> <%= @club.stadium %><br>
+      <strong>チームカラー:</strong> <span style="background-color: <%= @club.color_hex %>; padding: 0 5px;">&nbsp;&nbsp;&nbsp;</span> <%= @club.color_hex %></p>
+    </section>
+
+    <section class="upcoming_matches">
+      <h3>次の試合</h3>
+      <% upcoming_matches = @club.home_matches.where("kickoff_at > ?", Time.current).or(@club.away_matches.where("kickoff_at > ?", Time.current)).order(:kickoff_at).limit(3) %>
+      <% if upcoming_matches.any? %>
+        <ul class="list-unstyled">
+          <% upcoming_matches.each do |match| %>
+            <li><%= link_to "#{match.kickoff_at.strftime('%Y/%m/%d %H:%M')} - #{match.home_club.short_name} vs #{match.away_club.short_name}", match %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>次の試合情報はありません。</p>
+      <% end %>
+    </section>
+    
+
+    <section class="related_threads">
+      <h3>関連スレッド</h3>
+      <% if @club.forum_threads.any? %>
+        <ul class="list-unstyled">
+          <% @club.forum_threads.limit(5).each do |thread| %>
+            <li><%= link_to thread.title, thread %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>関連スレッドはありません。</p>
+      <% end %>
+    </section>
+  </aside>
+
+  <div class="col-md-8">
+    <h3>最近の試合結果</h3>
+    <% recent_matches = @club.home_matches.where("kickoff_at <= ?", Time.current).or(@club.away_matches.where("kickoff_at <= ?", Time.current)).order(kickoff_at: :desc).limit(5) %>
+    <% if recent_matches.any? %>
+      <ul class="list-unstyled">
+        <% recent_matches.each do |match| %>
+          <li><%= link_to "#{match.kickoff_at.strftime('%Y/%m/%d')} - #{match.home_club.short_name} #{match.home_score}-#{match.away_score} #{match.away_club.short_name}", match %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>最近の試合結果はありません。</p>
+    <% end %>
+  </div>
+</div>
