@@ -8,6 +8,7 @@ class MatchesController < ApplicationController
 
     @comments = @match.comments
     @comment  = current_user.comments.build(match_id: @match.id)
+    
     @mom_summary = Vote.where(votable: @match, category: "mom").group(:choice).count
   end
 
@@ -18,7 +19,6 @@ class MatchesController < ApplicationController
   def mom_results
     @match = Match.find(params[:id])
     @mom_summary = Vote.where(votable: @match, category: "mom").group(:choice).count
-    # Turbo Streamで集計結果を更新する想定
     render partial: 'matches/mom_results', locals: { mom_summary: @mom_summary }
   end
 
