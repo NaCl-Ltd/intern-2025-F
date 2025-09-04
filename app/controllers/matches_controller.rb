@@ -1,14 +1,14 @@
 class MatchesController < ApplicationController
-    def show
-        @match = Match.find(params[:id])
-        @mom_summary = Vote.where(votable: @match, category: "mom").group(:choice).count
-        @clubs = @match.clubs
-        @home_club = @clubs[0]
-        @away_club = @clubs[1]
+  def show
+    @match = Match.find(params[:id])
+    @mom_summary = Vote.where(votable: @match, category: "mom").group(:choice).count
+    @clubs = @match.clubs
+    @home_club = @clubs[0]
+    @away_club = @clubs[1]
 
-        @comments = @match.comments
-        @comment  = current_user.comments.build(match_id: @match.id)
-    end
+    @comments = @match.comments
+    @comment  = current_user.comments.build(match_id: @match.id)
+    
     @mom_summary = Vote.where(votable: @match, category: "mom").group(:choice).count
   end
 

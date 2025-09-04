@@ -4,10 +4,15 @@ class Match < ApplicationRecord
     belongs_to :away_club, class_name: "Club"
     has_many :forum_threads
     has_many :votes, as: :votable
+    has_many :comments
     scope :upcoming, -> { scheduled.where("kickoff_at > ?", Time.current).order(:kickoff_at) }
     after_create_commit :schedule_open_live_job, if: :scheduled?
     after_update_commit :schedule_close_votes_job, if: :ft?
 
+    def clubs
+      [home_club, away_club]
+    end
+    
     private
 
     def schedule_open_live_job

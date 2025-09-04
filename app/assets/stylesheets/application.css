@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
 .follow-stats {
   font-size: 0.85em;
   color: #555;

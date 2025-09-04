@@ -370,6 +370,110 @@ span.image {
   object-fit: contain;
 }
 
+.vote-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  font-family: system-ui, sans-serif;
+}
+
+.team-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.team-card {
+  flex: 1;
+  min-width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.team-card .team-header {
+  text-align: center;
+  font-weight: bold;
+  padding: 0.8rem;
+  color: #fff;
+}
+
+.team-card.home .team-header {
+  background: #007bff;
+}
+
+.team-card.away .team-header {
+  background: #28a745;
+}
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1rem;
+}
+
+.player-radio {
+  display: none;
+}
+
+.player-option {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.player-option .badge {
+  display: inline-block;
+  min-width: 40px;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  background: #eee;
+  font-weight: bold;
+  text-align: center;
+}
+
+.player-radio:checked + .player-option {
+  border-color: #007bff;
+  background: #e7f1ff;
+}
+
+.away .player-radio:checked + .player-option {
+  border-color: #28a745;
+  background: #e6f9ec;
+}
+
+.vote-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.vote-btn:hover {
+  background: linear-gradient(135deg, #0056b3, #00408d);
+}
+
+.submit-container {
+  text-align: center;
+}
+
 .badge-team {
   display: inline-block;
   border-radius: 12px;
@@ -399,3 +503,4 @@ span.image {
 .badge-team.tottenham-hotspur { background: #132257; color: #fff; }
 .badge-team.west-ham-united { background: #7A263A; color: #F3A664; }
 .badge-team.wolverhampton-wanderers { background: #FDB913; color: #231F20; }
+
