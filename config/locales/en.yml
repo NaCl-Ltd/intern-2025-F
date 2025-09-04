@@ -31,7 +31,7 @@
 
 en:
   hello: "Hello world"
-
-ja:
-  links:
-    latest: "最新"
+  datetime:
+    distance_in_words:
+      x_minutes: "%{count}minutes"
+      x_hours: "%{count}hours"

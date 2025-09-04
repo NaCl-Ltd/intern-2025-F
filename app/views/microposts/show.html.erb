@@ -19,7 +19,7 @@
           <%= image_tag @micropost.image.variant(:display) %>
         <% end %>
         <span class="timestamp">
-          Posted <%= time_ago_in_words(@micropost.created_at) %> ago.
+          <%= time_ago_in_words(@micropost.created_at) %>
         </span>
       </div>
     </section>
@@ -29,7 +29,7 @@
         <% @micropost.comments.each do |comment| %>
         <strong><%= comment.user.name %>:</strong>
         <span style = "float:right" class="timestamp">
-            <%= time_ago_in_words(comment.created_at) %> ago
+            <%= time_ago_in_words(comment.created_at) %>
         </span>
         <p><%= comment.content %></p>
         <% end %>

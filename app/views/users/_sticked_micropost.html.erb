@@ -8,7 +8,7 @@
   <% end %>
 </div>
 <div class="timestamp" style="color: #777777; margin-left: 60px;">
-  Posted <%= time_ago_in_words(@sticked_micropost.created_at) %> ago.
+  Posted <%= time_ago_in_words(@sticked_micropost.created_at) %>
   <% @num_of_likes = @likes.where(micropost_id: @sticked_micropost.id).count %>
   <div class="micropost-actions">
   <div id="like-btn<%= @sticked_micropost.id %>">
