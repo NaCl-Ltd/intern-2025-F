@@ -6,3 +6,10 @@ ja:
       user:
         following: "フォロー中"
         followers: "フォロワー"
+  datetime:
+    distance_in_words:
+      x_minutes: "%{count}分前"
+      x_hours: "%{count}時間前"
+      x_days: "%{count}日前"
+      x_months: "%{count}ヶ月前"
+      x_years: "%{count}年前"
