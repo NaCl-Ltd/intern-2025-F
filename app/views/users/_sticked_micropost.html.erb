@@ -1,5 +1,12 @@
 <%= link_to gravatar_for(@sticked_micropost.user, size: 50), @sticked_micropost.user %>
-<span class="user"><%= link_to @sticked_micropost.user.name, @sticked_micropost.user %></span>
+<span class="user">
+  <%= link_to @sticked_micropost.user.name, @sticked_micropost.user %>
+  <% if @sticked_micropost.user.favorite_team.present? %>
+    <span class="badge-team <%= @sticked_micropost.user.favorite_team.parameterize %>">
+      <%= @sticked_micropost.user.favorite_team %>
+    </span>
+  <% end %>
+</span>
 
 <div class="content">
   <%= @sticked_micropost.content %>
