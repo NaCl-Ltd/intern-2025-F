@@ -2,13 +2,23 @@ class Matches::VotesController < ApplicationController
   before_action :logged_in_user
   before_action :set_match
 
+  def new
+    @vote = Vote.new
+  end
+
   def create
-    vote = Vote.find_or_initialize_by(user: current_user, votable: @match, category: "mom")
-    vote.choice = params[:choice]
+    vote = Vote.find_or_initialize_by(
+      user: current_user,
+      votable: @match,
+      category: "mom"
+
+    )
+    vote.player_id = params[:match_vote][:choice]
+    vote.choice = params[:match_vote][:choice]
     if vote.save
-      # Turbo Streamで集計パーシャルを差し替え
       @mom_summary = Vote.where(votable: @match, category: "mom").group(:choice).count
-      render turbo_stream: turbo_stream.replace("mom_results", partial: "matches/mom_results", locals: { mom_summary: @mom_summary })
+      flash[:success] = "Vote recorded successfully."
+      redirect_to match_path(@match)
     else
       render json: { errors: vote.errors.full_messages }, status: :unprocessable_entity
     end

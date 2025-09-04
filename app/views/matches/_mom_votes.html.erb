@@ -1,0 +1,21 @@
+<%# MOM投票結果表示部分テンプレート %>
+<% if mom_summary.present? && mom_summary.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Votes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% mom_summary.each do |player_id, votes| %>
+        <tr>
+          <td><%= Player.find(player_id).name %></td>
+          <td><%= votes %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No votes yet.</p>
+<% end %>

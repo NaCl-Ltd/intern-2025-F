@@ -1,0 +1,15 @@
+<% mom_summary.sort_by { |_, count| -count }.each_with_index do |(player_id, count), idx| %>
+  <% percentage = (100 * (count.to_f / Vote.all.count )).round() %>
+  <% bar_color = case idx
+    when 0 then '#4caf50'   # 1位: 緑
+    when 1 then '#2196f3'   # 2位: 青
+    else '#9e9e9e'          # 3位以降: グレー
+  end %>
+  <div style="font-size: 2rem; margin-bottom: 1rem; width: 70%;">
+    <%= Player.find(player_id).name %>
+    <div style="background: #eee; border-radius: 8px; overflow: hidden; height: 2rem; margin: 0.5rem 0;">
+      <div style="background: <%= bar_color %>; width: <%= percentage %>%; height: 100%;"></div>
+    </div>
+    <strong><%= percentage %>%</strong> (Votes: <%= count %>)
+  </div>
+<% end %>

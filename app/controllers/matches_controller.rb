@@ -1,8 +1,13 @@
 class MatchesController < ApplicationController
-  def show
-    @match = Match.find(params[:id])
-    @thread = @match.forum_threads.find_or_create_by!(thread_type: :match, user: system_user) do |thread|
-      thread.title = "#{@match.home_club.short_name} vs #{@match.away_club.short_name} - Match Discussion"
+    def show
+        @match = Match.find(params[:id])
+        @mom_summary = Vote.where(votable: @match, category: "mom").group(:choice).count
+        @clubs = @match.clubs
+        @home_club = @clubs[0]
+        @away_club = @clubs[1]
+
+        @comments = @match.comments
+        @comment  = current_user.comments.build(match_id: @match.id)
     end
     @mom_summary = Vote.where(votable: @match, category: "mom").group(:choice).count
   end
@@ -14,7 +19,6 @@ class MatchesController < ApplicationController
   def mom_results
     @match = Match.find(params[:id])
     @mom_summary = Vote.where(votable: @match, category: "mom").group(:choice).count
-    # Turbo Streamで集計結果を更新する想定
     render partial: 'matches/mom_results', locals: { mom_summary: @mom_summary }
   end
 
