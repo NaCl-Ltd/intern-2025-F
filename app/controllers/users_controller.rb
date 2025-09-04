@@ -64,24 +64,24 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      Rails.logger.debug "[DEBUG] --------------------------"
-      Rails.logger.debug "[DEBUG] params: #{params}"
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation,
-                                   :introduction)
-    end
+  def user_params
+    Rails.logger.debug "[DEBUG] --------------------------"
+    Rails.logger.debug "[DEBUG] params: #{params}"
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation,
+                                 :introduction)
+  end
 
-    # beforeフィルタ
+  # beforeフィルタ
 
-    # 正しいユーザーかどうか確認
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url, status: :see_other) unless current_user?(@user)
-    end
+  # 正しいユーザーかどうか確認
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url, status: :see_other) unless current_user?(@user)
+  end
 
-    # 管理者かどうか確認
-    def admin_user
-      redirect_to(root_url, status: :see_other) unless current_user.admin?
-    end
+  # 管理者かどうか確認
+  def admin_user
+    redirect_to(root_url, status: :see_other) unless current_user.admin?
+  end
 end

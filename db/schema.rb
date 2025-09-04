@@ -172,6 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_09_05_080005) do
     t.datetime "reset_sent_at"
     t.text "introduction"
     t.integer "sticked_post_id"
+    t.string "favorite_team"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

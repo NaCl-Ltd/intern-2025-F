@@ -9407,17 +9407,17 @@ input {
 .microposts .timestamp {
   color: #777777;
   display: block;
-  float: right;
+  margin-right: 60px;
 }
 
-/* line 302, app/assets/stylesheets/custom.scss */
+/* line 301, app/assets/stylesheets/custom.scss */
 .microposts .gravatar {
   float: left;
   margin-right: 10px;
   margin-top: 5px;
 }
 
-/* line 307, app/assets/stylesheets/custom.scss */
+/* line 306, app/assets/stylesheets/custom.scss */
 .microposts .micropost-actions {
   display: flex;
   align-items: center;
@@ -9445,6 +9445,181 @@ span.image {
 /* line 328, app/assets/stylesheets/custom.scss */
 span.image input {
   border: 0;
+}
+
+/* Clubs index */
+/* line 335, app/assets/stylesheets/custom.scss */
+.clubs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+/* line 342, app/assets/stylesheets/custom.scss */
+.club-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+/* line 348, app/assets/stylesheets/custom.scss */
+.club-card:hover {
+  transform: translateY(-5px);
+}
+
+/* line 352, app/assets/stylesheets/custom.scss */
+.club-card .club-crest {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* line 358, app/assets/stylesheets/custom.scss */
+.club-card .card-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* line 365, app/assets/stylesheets/custom.scss */
+.club-crest-large {
+  display: block;
+  margin: 0 auto 20px;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+/* line 373, app/assets/stylesheets/custom.scss */
+.badge-team {
+  display: inline-block;
+  border-radius: 12px;
+  padding: 2px 10px;
+  font-size: 0.6em !important;
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+/* line 382, app/assets/stylesheets/custom.scss */
+.badge-team.arsenal {
+  background: #EF0107;
+  color: #fff;
+}
+
+/* line 383, app/assets/stylesheets/custom.scss */
+.badge-team.aston-villa {
+  background: #670E36;
+  color: #95BFE5;
+}
+
+/* line 384, app/assets/stylesheets/custom.scss */
+.badge-team.bournemouth {
+  background: #DA291C;
+  color: #000;
+}
+
+/* line 385, app/assets/stylesheets/custom.scss */
+.badge-team.brentford {
+  background: #E30613;
+  color: #fff;
+}
+
+/* line 386, app/assets/stylesheets/custom.scss */
+.badge-team.brighton-and-hove-albion {
+  background: #0057B8;
+  color: #FFD100;
+}
+
+/* line 387, app/assets/stylesheets/custom.scss */
+.badge-team.burnley {
+  background: #6C1D45;
+  color: #FFCD00;
+}
+
+/* line 388, app/assets/stylesheets/custom.scss */
+.badge-team.chelsea {
+  background: #034694;
+  color: #fff;
+}
+
+/* line 389, app/assets/stylesheets/custom.scss */
+.badge-team.crystal-palace {
+  background: #1B458F;
+  color: #E03A3E;
+}
+
+/* line 390, app/assets/stylesheets/custom.scss */
+.badge-team.everton {
+  background: #003399;
+  color: #fff;
+}
+
+/* line 391, app/assets/stylesheets/custom.scss */
+.badge-team.fulham {
+  background: #000000;
+  color: #fff;
+}
+
+/* line 392, app/assets/stylesheets/custom.scss */
+.badge-team.leeds-united {
+  background: #FFCD00;
+  color: #0057B8;
+}
+
+/* line 393, app/assets/stylesheets/custom.scss */
+.badge-team.liverpool {
+  background: #C8102E;
+  color: #fff;
+}
+
+/* line 394, app/assets/stylesheets/custom.scss */
+.badge-team.manchester-city {
+  background: #6CABDD;
+  color: #1C2C5B;
+}
+
+/* line 395, app/assets/stylesheets/custom.scss */
+.badge-team.manchester-united {
+  background: #DA291C;
+  color: #FFD100;
+}
+
+/* line 396, app/assets/stylesheets/custom.scss */
+.badge-team.newcastle-united {
+  background: #241F20;
+  color: #fff;
+}
+
+/* line 397, app/assets/stylesheets/custom.scss */
+.badge-team.nottingham-forest {
+  background: #DD1E2F;
+  color: #fff;
+}
+
+/* line 398, app/assets/stylesheets/custom.scss */
+.badge-team.sunderland {
+  background: #E03A3E;
+  color: #fff;
+}
+
+/* line 399, app/assets/stylesheets/custom.scss */
+.badge-team.tottenham-hotspur {
+  background: #132257;
+  color: #fff;
+}
+
+/* line 400, app/assets/stylesheets/custom.scss */
+.badge-team.west-ham-united {
+  background: #7A263A;
+  color: #F3A664;
+}
+
+/* line 401, app/assets/stylesheets/custom.scss */
+.badge-team.wolverhampton-wanderers {
+  background: #FDB913;
+  color: #231F20;
 }
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
