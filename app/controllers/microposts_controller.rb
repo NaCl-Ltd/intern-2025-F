@@ -15,6 +15,8 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
+    @sticked_micropost = Micropost.find(current_user.sticked_post_id)
+    @likes = Like.all
     @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
       flash[:success] = "Micropost created!"

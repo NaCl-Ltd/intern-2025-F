@@ -35,6 +35,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
+      Rails.logger.info "[INFO] User updated: #{user_params.inspect}"
       flash[:success] = "Profile updated"
       redirect_to @user
     else
@@ -69,7 +70,8 @@ class UsersController < ApplicationController
     Rails.logger.debug "[DEBUG] params: #{params}"
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation,
-                                 :introduction)
+                                 :introduction,
+                                 :favorite_team)
   end
 
   # beforeフィルタ

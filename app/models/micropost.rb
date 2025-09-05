@@ -1,6 +1,5 @@
 class Micropost < ApplicationRecord
   belongs_to :user
-  belongs_to :forum_thread, counter_cache: false
   has_one_attached :image do |attachable|
     attachable.variant :display, resize_to_limit: [500, 500]
   end
