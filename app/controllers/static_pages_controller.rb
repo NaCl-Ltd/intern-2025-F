@@ -3,7 +3,9 @@ class StaticPagesController < ApplicationController
   def home
     if logged_in?
       @micropost  = current_user.microposts.build
-      @sticked_micropost = Micropost.find_by(id: current_user.sticked_post_id) if current_user.sticked_post_id?
+      Rails.logger.info "Current user's sticked_post_id: #{current_user.sticked_post_id}"
+      Rails.logger.info "Current user's sticked_post: #{Micropost.find(current_user.sticked_post_id)}"
+      @sticked_micropost = Micropost.find(current_user.sticked_post_id)
       @feed_items = current_user.feed.paginate(page: params[:page])
       @likes = Like.all
       @comments = Comment.all

@@ -9,23 +9,40 @@
     <td style="text-align: center; width: 120px;">vs</td>
     <td style="text-align: left; padding-left: 30px;"><%= @match.away_score %></td>
   </tr>
+  <tr>
+    <td></td>
+    <td style="font-size: 2rem;"><strong><%= @match.kickoff_at.strftime("%Y-%m-%d") %></strong></td>
+    <td></td>
+  </tr>
 </table>
 
-<div class="match-info" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 5px 0; font-size: 2rem; width: 100%;">
-  <div>
-    <strong><%= @match.kickoff_at.strftime("%Y-%m-%d") %></strong>
-  </div>
+<div class="mom-voting-section" style="text-align: center; margin-top: 50px;">
+  <details id="mom-details">
+    <summary id="mom-summary" style="font-weight: bold; letter-spacing: 0.01rem; margin-top: 50px; font-size: 3.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+      <span id="mom-arrow" style="font-size: 2rem; margin-right: 10px;">▶</span>
+      Man of the Match Voting Result
+    </summary>
+    <div>
+      <%= turbo_frame_tag "mom_results", style: "display: flex; flex-direction: column; align-items: center; justify-content: center;" do %>
+        <%= render partial: "mom_results", locals: { mom_summary: @mom_summary } %>
+      <% end %>
+
+      <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+        <%= link_to "Vote", new_match_vote_path(@match.id), class: "modern-vote-btn" %>
+      </div>
+    </div>
+  </details>
 </div>
 
-
-<h1 style="font-weight: bold; letter-spacing: 0.01rem; margin-top: 50px;">Man of the Match Voting Result</h1>
-<%= turbo_frame_tag "mom_results", style: "display: flex; flex-direction: column; align-items: center; justify-content: center;" do %>
-  <%= render partial: "mom_results", locals: { mom_summary: @mom_summary } %>
-<% end %>
-
-<div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
-  <%= link_to "Vote", new_match_vote_path(@match.id), class: "modern-vote-btn" %>
-</div>
+<script>
+  document.addEventListener("turbo:load", function() {
+    const details = document.getElementById("mom-details");
+    const arrow = document.getElementById("mom-arrow");
+    details.addEventListener("toggle", function() {
+      arrow.textContent = details.open ? "▼" : "▶";
+    });
+  });
+</script>
 
 <style>
   .modern-vote-btn {
